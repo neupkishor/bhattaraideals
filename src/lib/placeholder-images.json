@@ -1,3 +1,70 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-iphone",
+      "description": "Hero shot of an iPhone",
+      "imageUrl": "https://images.unsplash.com/photo-1616410011236-7a42121dd981?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxpcGhvbmV8ZW58MHx8fHwxNzY0NDQ4NzYwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "iphone"
+    },
+    {
+      "id": "iphone-15-pro-natural",
+      "description": "iPhone 15 Pro in Natural Titanium finish",
+      "imageUrl": "https://images.unsplash.com/photo-1743529628081-6777a326a4e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8aXBob25lJTIwZnJvbnR8ZW58MHx8fHwxNzY0NTU5NTk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "iphone front"
+    },
+    {
+      "id": "iphone-15-blue",
+      "description": "iPhone 15 in Blue finish",
+      "imageUrl": "https://images.unsplash.com/photo-1726828537956-61ae115d7d7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxpcGhvbmUlMjBibHVlfGVufDB8fHx8MTc2NDU1OTU5N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "iphone blue"
+    },
+    {
+      "id": "iphone-14-pro-purple",
+      "description": "iPhone 14 Pro in Deep Purple finish",
+      "imageUrl": "https://images.unsplash.com/photo-1574755537274-af70a43065ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxpcGhvbmUlMjBwdXJwbGV8ZW58MHx8fHwxNzY0NTU5NTk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "iphone purple"
+    },
+    {
+      "id": "airpods-pro-2",
+      "description": "AirPods Pro 2nd Generation with case",
+      "imageUrl": "https://images.unsplash.com/photo-1591386618629-4ef48ffdc0c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8YWlycG9kcyUyMHByb3xlbnwwfHx8fDE3NjQ1NTk1OTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "airpods pro"
+    },
+    {
+      "id": "airpods-3",
+      "description": "AirPods 3rd Generation with case",
+      "imageUrl": "https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxhaXJwb2RzfGVufDB8fHx8MTc2NDU1OTU5N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "airpods"
+    },
+    {
+      "id": "power-bank-anker",
+      "description": "Anker Power Bank",
+      "imageUrl": "https://images.unsplash.com/photo-1644571669391-c0b48363abed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cG93ZXIlMjBiYW5rfGVufDB8fHx8MTc2NDQ3MDMxMnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "power bank"
+    },
+    {
+      "id": "apple-watch-ultra-2",
+      "description": "Apple Watch Ultra 2",
+      "imageUrl": "https://images.unsplash.com/photo-1553545204-4f7d339aa06a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxzbWFydHdhdGNofGVufDB8fHx8MTc2NDU1MDQ1N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "smartwatch"
+    },
+    {
+      "id": "iphone-case-clear",
+      "description": "Clear iPhone case",
+      "imageUrl": "https://images.unsplash.com/photo-1619510077427-fb14470ce48e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxwaG9uZSUyMGNhc2V8ZW58MHx8fHwxNzY0NDY0NTY5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "phone case"
+    },
+    {
+      "id": "sony-headphones",
+      "description": "Sony WH-1000XM5 Headphones",
+      "imageUrl": "https://images.unsplash.com/photo-1583394838336-acd977736f90?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxoZWFkcGhvbmVzfGVufDB8fHx8MTc2NDQ3NTY5NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "headphones"
+    },
+    {
+      "id": "anker-charger",
+      "description": "Anker USB-C Charger",
+      "imageUrl": "https://images.unsplash.com/photo-1627886107121-b7daaede3974?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjaGFyZ2VyfGVufDB8fHx8MTc2NDU1OTU5N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "charger"
+    }
+  ]
 }
