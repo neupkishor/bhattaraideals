@@ -1,14 +1,16 @@
 'use client';
 
 import Link from 'next/link';
-import { Smartphone } from 'lucide-react';
+import { Briefcase, Smartphone } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useUser } from '@/firebase';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const { user } = useUser();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,6 +56,15 @@ export function Header() {
           >
             Confidence
           </Link>
+          {user && (
+            <Link
+              href="/manage"
+              className="text-foreground/80 hover:text-foreground transition-colors"
+            >
+              <Briefcase className="h-5 w-5" />
+              <span className="sr-only">Manage</span>
+            </Link>
+          )}
         </nav>
         <Button size="sm" asChild>
           <Link href="/#iphones">Shop iPhones</Link>

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import type { Product } from '@/lib/products';
+import type { Product } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -45,11 +45,11 @@ export function ProductCard({ product }: { product: Product }) {
           <CardContent className="p-0 flex-grow flex flex-col">
             <div className="aspect-square bg-white relative overflow-hidden">
               <Image
-                src={product.image.src}
+                src={product.imageUrl}
                 alt={product.name}
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-110"
-                data-ai-hint={product.image.hint}
+                data-ai-hint={product.imageHint}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>

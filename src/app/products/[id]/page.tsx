@@ -1,6 +1,7 @@
+'use client';
+
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
-import { products } from '@/lib/products';
+import { notFound, useParams } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -11,25 +12,28 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { ProductGrid } from '@/components/products/product-grid';
+import { useDoc, useFirestore, useMemoFirebase } from '@/firebase';
+import { doc, collection } from 'firebase/firestore';
+import type { Product } from '@/lib/types';
+import { MakeOfferDialog } from '@/components/products/make-offer-dialog';
 
-export function generateStaticParams() {
-  return products.map((product) => ({
-    id: product.id,
-  }));
-}
+export default function ProductPage() {
+  const { id } = useParams();
+  const firestore = useFirestore();
+  const productRef = useMemoFirebase(() => doc(firestore, 'products', id as string), [firestore, id]);
+  const { data: product, isLoading } = useDoc<Product>(productRef);
 
-export default function ProductPage({ params }: { params: { id: string } }) {
-  const product = products.find((p) => p.id === params.id);
+  // This should fetch related products from Firestore
+  // For now, we'll keep it simple and not show related products
+  const relatedProducts: Product[] = [];
+
+  if (isLoading) {
+    return <div className="container mx-auto text-center py-20">Loading...</div>;
+  }
 
   if (!product) {
     notFound();
   }
-
-  const relatedProducts = products
-    .filter(
-      (p) => p.category === product?.category && p.id !== product?.id
-    )
-    .slice(0, 4);
 
   return (
     <div className="bg-white">
@@ -37,12 +41,12 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-start">
           <div className="aspect-square bg-card rounded-2xl flex items-center justify-center p-8 sticky top-24 shadow-md">
             <Image
-              src={product.image.src}
+              src={product.imageUrl}
               alt={product.name}
               width={600}
               height={600}
               className="object-cover"
-              data-ai-hint={product.image.hint}
+              data-ai-hint={product.imageHint}
             />
           </div>
           <div className="space-y-6">
@@ -75,9 +79,12 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               </span>
             </div>
 
-            <Button size="lg" className="w-full">
-              Add to Cart
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <Button size="lg" className="flex-1">
+                Buy Now
+              </Button>
+              <MakeOfferDialog product={product} />
+            </div>
 
             {product.specs && (
               <div className="pt-6 border-t">

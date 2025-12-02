@@ -14,10 +14,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Card, CardContent } from '@/components/ui/card';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { CheckCircle, Loader2, Upload } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { cn } from '@/lib/utils';
+import { Loader2, Upload } from 'lucide-react';
 import Image from 'next/image';
 
 const deviceTypes = {
@@ -89,6 +87,7 @@ export function SellForm() {
     <Card className="rounded-2xl shadow-lg">
       <CardContent className="p-6 md:p-8">
         <form ref={formRef} action={formAction} className="space-y-6">
+          <input type="hidden" name="photo" value={photoPreview || ''} />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="name">Full Name (Optional)</Label>
@@ -107,9 +106,9 @@ export function SellForm() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="photo">Device Photo</Label>
+            <Label htmlFor="photo-upload">Device Photo</Label>
              <div className="flex items-center gap-4">
-              <label htmlFor="photo" className="cursor-pointer flex-grow">
+              <label htmlFor="photo-upload" className="cursor-pointer flex-grow">
                 <div className="flex items-center justify-center w-full h-32 border-2 border-dashed rounded-lg text-muted-foreground hover:bg-muted/50 transition-colors">
                   {photoPreview ? (
                      <Image src={photoPreview} alt="Device preview" width={128} height={128} className="h-full w-auto object-contain p-2" />
@@ -122,7 +121,7 @@ export function SellForm() {
                 </div>
               </label>
             </div>
-            <Input id="photo" name="photo" type="file" className="sr-only" accept="image/*" onChange={handlePhotoChange}/>
+            <Input id="photo-upload" name="photo-upload" type="file" className="sr-only" accept="image/*" onChange={handlePhotoChange}/>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -145,7 +144,7 @@ export function SellForm() {
                <Select name="deviceSubType" required disabled={!selectedType}>
                 <SelectTrigger id="deviceSubType" >
                   <SelectValue placeholder="Select sub-category" />
-                </SelectTrigger>
+                </Trigger>
                 <SelectContent>
                   {selectedType && deviceTypes[selectedType].map((subType) => (
                     <SelectItem key={subType} value={subType}>{subType}</SelectItem>
