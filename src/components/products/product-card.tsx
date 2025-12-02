@@ -43,7 +43,7 @@ export function ProductCard({ product }: { product: Product }) {
               src={product.image.src}
               alt={product.name}
               fill
-              className="object-contain p-8 transition-transform duration-300 group-hover:scale-105"
+              className="object-cover p-8 transition-transform duration-300 group-hover:scale-105"
               data-ai-hint={product.image.hint}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
@@ -54,7 +54,7 @@ export function ProductCard({ product }: { product: Product }) {
                 {product.name}
               </h3>
               <p className="font-semibold text-lg text-primary-foreground whitespace-nowrap">
-                ${product.price}
+                NRS {product.price}
               </p>
             </div>
             <div className="flex justify-between items-center mt-4">

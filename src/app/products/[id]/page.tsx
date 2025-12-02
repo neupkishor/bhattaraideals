@@ -29,7 +29,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     .filter(
       (p) => p.category === product?.category && p.id !== product?.id
     )
-    .slice(0, 3);
+    .slice(0, 4);
 
   return (
     <div className="bg-white">
@@ -41,7 +41,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               alt={product.name}
               width={600}
               height={600}
-              className="object-contain"
+              className="object-cover"
               data-ai-hint={product.image.hint}
             />
           </div>
@@ -57,7 +57,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
             </div>
 
             <div className="flex items-baseline gap-4">
-              <span className="text-4xl font-bold">${product.price}</span>
+              <span className="text-4xl font-bold">NRS {product.price}</span>
             </div>
 
             <div className="flex items-center gap-2">
