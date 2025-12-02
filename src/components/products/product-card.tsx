@@ -20,12 +20,12 @@ function ConditionBadge({ condition }: ConditionBadgeProps) {
     <Badge
       variant={variant}
       className={cn(
-        'border',
+        'border absolute top-4 left-4 z-10',
         condition === 'Brand New' &&
           'bg-accent/80 border-accent text-accent-foreground',
         condition === 'Like New' &&
           'bg-primary/80 border-primary text-primary-foreground',
-        condition === 'Certified Used' && 'border-foreground/50'
+        condition === 'Certified Used' && 'border-foreground/50 bg-card'
       )}
     >
       {condition}
@@ -36,7 +36,8 @@ function ConditionBadge({ condition }: ConditionBadgeProps) {
 export function ProductCard({ product }: { product: Product }) {
   return (
     <Link href={`/products/${product.id}`} className="group block">
-      <Card className="rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl">
+      <Card className="rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl relative">
+        <ConditionBadge condition={product.condition} />
         <CardContent className="p-0">
           <div className="aspect-square bg-white relative overflow-hidden">
             <Image
@@ -57,8 +58,7 @@ export function ProductCard({ product }: { product: Product }) {
                 NRS {product.price}
               </p>
             </div>
-            <div className="flex justify-between items-center mt-4">
-              <ConditionBadge condition={product.condition} />
+            <div className="flex justify-end items-center mt-4">
               <p
                 className={cn(
                   'text-sm font-medium',
