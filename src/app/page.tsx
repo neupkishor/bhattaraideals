@@ -1,6 +1,7 @@
 import { Hero } from '@/components/home/hero';
 import { ProductGrid } from '@/components/products/product-grid';
 import { products } from '@/lib/products';
+import { SellYourDevice } from '@/components/home/sell-your-device';
 
 export default function Home() {
   const iphones = products.filter((p) => p.category === 'iPhones');
@@ -20,6 +21,7 @@ export default function Home() {
           id="accessories"
         />
         <ProductGrid products={deals} title="Curated Deals" id="deals" />
+        <SellYourDevice />
       </div>
     </>
   );
