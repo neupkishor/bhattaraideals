@@ -36,14 +36,14 @@ function ConditionBadge({ condition }: ConditionBadgeProps) {
 export function ProductCard({ product }: { product: Product }) {
   return (
     <Link href={`/products/${product.id}`} className="group block">
-      <Card className="rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+      <Card className="rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl">
         <CardContent className="p-0">
-          <div className="aspect-square bg-white relative">
+          <div className="aspect-square bg-white relative overflow-hidden">
             <Image
               src={product.image.src}
               alt={product.name}
               fill
-              className="object-cover p-8 transition-transform duration-300 group-hover:scale-105"
+              className="object-cover transition-transform duration-300 group-hover:scale-110"
               data-ai-hint={product.image.hint}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
