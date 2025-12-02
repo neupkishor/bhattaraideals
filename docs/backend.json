@@ -1,0 +1,228 @@
+{
+  "entities": {
+    "Product": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Product",
+      "type": "object",
+      "description": "Represents a product for sale.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the product."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the product."
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed description of the product."
+        },
+        "price": {
+          "type": "number",
+          "description": "The price of the product."
+        },
+        "condition": {
+          "type": "string",
+          "description": "The condition of the product (e.g., Brand New, Like New, Certified Used)."
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL of the product image.",
+          "format": "uri"
+        },
+        "availability": {
+          "type": "string",
+          "description": "Availability status of the product (e.g., Available now, Coming soon)."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "price",
+        "condition",
+        "imageUrl",
+        "availability"
+      ]
+    },
+    "Inquiry": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Inquiry",
+      "type": "object",
+      "description": "Represents a user inquiry about a product.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the inquiry."
+        },
+        "productId": {
+          "type": "string",
+          "description": "Reference to Product. (Relationship: Product 1:N Inquiry)"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to User. (Relationship: User 1:N Inquiry)"
+        },
+        "message": {
+          "type": "string",
+          "description": "The user's message/inquiry."
+        },
+        "offerAmount": {
+          "type": "number",
+          "description": "The amount the user is offering for the product."
+        },
+        "inquiryDate": {
+          "type": "string",
+          "description": "The date and time the inquiry was submitted.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "productId",
+        "userId",
+        "message",
+        "offerAmount",
+        "inquiryDate"
+      ]
+    },
+    "Request": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Request",
+      "type": "object",
+      "description": "Represents a user's request to sell their device.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the request."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to User. (Relationship: User 1:N Request)"
+        },
+        "deviceDetails": {
+          "type": "string",
+          "description": "Details about the device the user wants to sell."
+        },
+        "requestDate": {
+          "type": "string",
+          "description": "The date and time the request was submitted.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "deviceDetails",
+        "requestDate"
+      ]
+    },
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user of the application.  Note: Authentication-related data is assumed to be handled externally.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the user."
+        },
+        "email": {
+          "type": "string",
+          "description": "The user's email address.",
+          "format": "email"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "The user's first name."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "The user's last name."
+        }
+      },
+      "required": [
+        "id",
+        "email",
+        "firstName",
+        "lastName"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/products/{productId}",
+        "definition": {
+          "entityName": "Product",
+          "schema": {
+            "$ref": "#/backend/entities/Product"
+          },
+          "description": "Stores product information. Only admins can create, read, update and delete products.",
+          "params": [
+            {
+              "name": "productId",
+              "description": "Unique identifier for the product."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/inquiries/{inquiryId}",
+        "definition": {
+          "entityName": "Inquiry",
+          "schema": {
+            "$ref": "#/backend/entities/Inquiry"
+          },
+          "description": "Stores user inquiries about products. Includes denormalized 'userId' for authorization independence.",
+          "params": [
+            {
+              "name": "inquiryId",
+              "description": "Unique identifier for the inquiry."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/requests/{requestId}",
+        "definition": {
+          "entityName": "Request",
+          "schema": {
+            "$ref": "#/backend/entities/Request"
+          },
+          "description": "Stores user requests to sell their devices. Includes 'userId' for authorization.",
+          "params": [
+            {
+              "name": "requestId",
+              "description": "Unique identifier for the request."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/roles_admin/{userId}",
+        "definition": {
+          "entityName": "User",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Indicates admin role. Existence of document grants admin privileges.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "Unique identifier for the user."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore data structure is designed to support the 'Bhattarai Deals' application, focusing on managing products, inquiries, and user requests. The core principle is Authorization Independence, achieved through denormalization, and Structural Segregation to simplify security rules and enhance debuggability.  Specifically, all authorization checks rely on `request.auth.uid` and data within the documents themselves, avoiding hierarchical `get()` calls. \n\nThe `/products` collection stores product information. Admins have full CRUD access to this collection. \n\nInquiries are stored in `/inquiries/{inquiryId}`, with each inquiry document containing the `userId` and `productId`. This denormalization enables rules to authorize based on the requesting user and associated product without requiring parent document lookups.\n\nRequests (leads) are stored under `/requests/{requestId}` and also contain the `userId` and `deviceDetails`.  Admin roles will be stored in the `/roles_admin/{uid}` collection to indicate admin access and manage products, inquiries, and requests.\n\nThis structure supports QAPs. Listing products is inherently secure as it doesn't rely on user-specific authorization at the collection level. Listing inquiries is secured based on the denormalized `userId` within each inquiry document, and the admin role.\n\nOwnership of data is enforced via path-based rules (e.g., inquiries)."
+  }
+}
