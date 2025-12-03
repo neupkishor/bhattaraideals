@@ -6,6 +6,7 @@ import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
 import { collection, query, orderBy, limit } from 'firebase/firestore';
 import type { Product, Testimonial } from '@/lib/types';
 import { Testimonials } from '@/components/home/testimonials';
+import { RepairServices } from '@/components/home/repair-services';
 
 export default function Home() {
   const firestore = useFirestore();
@@ -48,6 +49,7 @@ export default function Home() {
           <Testimonials testimonials={testimonials ?? []} />
         )}
         <SellYourDevice />
+        <RepairServices />
       </div>
     </>
   );

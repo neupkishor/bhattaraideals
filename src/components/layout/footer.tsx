@@ -13,20 +13,20 @@ export function Footer() {
             </span>
           </div>
           <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
-            <Link href="/#deals" className="hover:text-foreground">
-              Deals
+            <Link href="/#iphones" className="hover:text-foreground">
+              Buy
+            </Link>
+             <Link href="/sell" className="hover:text-foreground">
+              Sell
+            </Link>
+             <Link href="/#repair" className="hover:text-foreground">
+              Repair
             </Link>
             <Link href="/compare" className="hover:text-foreground">
               Compare
             </Link>
             <Link href="/confidence" className="hover:text-foreground">
               Warranty
-            </Link>
-            <Link href="/confidence" className="hover:text-foreground">
-              Return Policy
-            </Link>
-            <Link href="/confidence" className="hover:text-foreground">
-              Authenticity
             </Link>
           </nav>
           <p className="text-xs text-muted-foreground">
