@@ -17,6 +17,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, Upload } from 'lucide-react';
 import Image from 'next/image';
+import imageCompression from 'browser-image-compression';
+
 
 const deviceTypes = {
   phone: ['Android', 'iOS'],
@@ -45,6 +47,7 @@ export function SellForm() {
   const [state, formAction] = useFormState(submitForQuote, initialState);
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [selectedType, setSelectedType] = useState<keyof typeof deviceTypes | ''>('');
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
@@ -59,6 +62,9 @@ export function SellForm() {
         formRef.current?.reset();
         setPhotoPreview(null);
         setSelectedType('');
+        if (fileInputRef.current) {
+          fileInputRef.current.value = '';
+        }
       } else {
         toast({
           title: 'Oops!',
@@ -69,14 +75,39 @@ export function SellForm() {
     }
   }, [state, toast]);
   
-  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePhotoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPhotoPreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+      try {
+        const options = {
+          maxSizeMB: 1,
+          maxWidthOrHeight: 1920,
+          useWebWorker: true,
+        };
+        const compressedFile = await imageCompression(file, options);
+        
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setPhotoPreview(reader.result as string);
+        };
+        reader.readAsDataURL(compressedFile);
+
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(compressedFile);
+
+        if (fileInputRef.current) {
+            fileInputRef.current.files = dataTransfer.files;
+        }
+
+      } catch (error) {
+        console.error('Error compressing image:', error);
+        setPhotoPreview(null);
+        toast({
+          title: 'Image Error',
+          description: 'Could not process the image. Please try another one.',
+          variant: 'destructive',
+        });
+      }
     } else {
       setPhotoPreview(null);
     }
@@ -86,7 +117,6 @@ export function SellForm() {
     <Card className="rounded-2xl shadow-lg">
       <CardContent className="p-6 md:p-8">
         <form ref={formRef} action={formAction} className="space-y-6">
-          <input type="hidden" name="photo" value={photoPreview || ''} />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="name">Full Name (Optional)</Label>
@@ -120,7 +150,7 @@ export function SellForm() {
                 </div>
               </label>
             </div>
-            <Input id="photo-upload" name="photo-upload" type="file" className="sr-only" accept="image/*" onChange={handlePhotoChange}/>
+            <Input id="photo-upload" name="photo" type="file" className="sr-only" accept="image/*" onChange={handlePhotoChange} ref={fileInputRef} required/>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

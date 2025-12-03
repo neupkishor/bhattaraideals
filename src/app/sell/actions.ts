@@ -1,8 +1,7 @@
 'use server';
 
 import { z } from 'zod';
-import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { initializeFirebase } from '@/firebase';
 
 const schema = z
@@ -12,7 +11,7 @@ const schema = z
     phone: z.string().min(7, 'Please enter a valid phone number.').optional(),
     deviceType: z.string().min(1, 'Please select a device type.'),
     deviceSubType: z.string().min(1, 'Please select a sub-category.'),
-    photo: z.string().min(1, 'A photo is required.'), 
+    originalFilename: z.string().optional(),
   })
   .refine((data) => !!data.email || !!data.phone, {
     message: 'Either email or phone number is required.',
@@ -21,7 +20,15 @@ const schema = z
 
 export async function submitForQuote(prevState: any, formData: FormData) {
   const { firestore } = initializeFirebase();
-  const storage = getStorage();
+
+  const file = formData.get('photo') as File | null;
+
+  if (!file) {
+     return {
+      message: 'A photo is required.',
+      isSuccess: false,
+    };
+  }
 
   const validatedFields = schema.safeParse({
     name: formData.get('name'),
@@ -29,7 +36,7 @@ export async function submitForQuote(prevState: any, formData: FormData) {
     phone: formData.get('phone'),
     deviceType: formData.get('deviceType'),
     deviceSubType: formData.get('deviceSubType'),
-    photo: formData.get('photo'),
+    originalFilename: file.name,
   });
 
   if (!validatedFields.success) {
@@ -41,20 +48,36 @@ export async function submitForQuote(prevState: any, formData: FormData) {
       isSuccess: false,
     };
   }
+  
+  const uploadApiForm = new FormData();
+  uploadApiForm.append('file', file);
+  uploadApiForm.append('platform', 'p3_bhattaraideals');
+  uploadApiForm.append('name', validatedFields.data.originalFilename || 'upload');
 
-  const { photo, ...requestData } = validatedFields.data;
 
   try {
-    // 1. Upload the photo to Firebase Storage
-    const storageRef = ref(storage, `sell-requests/${Date.now()}-${Math.random().toString(36).substring(7)}`);
-    const uploadResult = await uploadString(storageRef, photo, 'data_url');
-    const photoUrl = await getDownloadURL(uploadResult.ref);
+    const uploadResponse = await fetch('https://neupgroup.com/content/bridge/api/upload', {
+      method: 'POST',
+      body: uploadApiForm,
+    });
+    
+    if (!uploadResponse.ok) {
+       const errorBody = await uploadResponse.text();
+       console.error('Upload API Error:', errorBody);
+       throw new Error(`Upload failed with status: ${uploadResponse.status}`);
+    }
 
-    // 2. Save the details to the 'requests' collection in Firestore
+    const uploadResult = await uploadResponse.json();
+
+    if (!uploadResult.success) {
+        throw new Error(uploadResult.message || 'The upload API returned an error.');
+    }
+
+    // Save the details to the 'requests' collection in Firestore
     await addDoc(collection(firestore, 'requests'), {
-      ...requestData,
-      photoUrl,
-      requestDate: new Date(),
+      ...validatedFields.data,
+      photoUrl: uploadResult.url,
+      requestDate: serverTimestamp(),
     });
 
     return {
