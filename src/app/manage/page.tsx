@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Package, Mail, GitPullRequest } from "lucide-react";
+import { Package, Mail, GitPullRequest, Star } from "lucide-react";
 
 export default function ManageDashboard() {
   return (
@@ -55,6 +55,23 @@ export default function ManageDashboard() {
           <CardContent>
             <Button asChild>
               <Link href="/manage/requests">Review Requests</Link>
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Star />
+              Testimonials
+            </CardTitle>
+            <CardDescription>
+              Manage customer testimonials shown on the homepage.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button asChild>
+              <Link href="/manage/testimonials">Manage Testimonials</Link>
             </Button>
           </CardContent>
         </Card>

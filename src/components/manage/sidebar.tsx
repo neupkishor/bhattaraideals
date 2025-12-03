@@ -15,13 +15,14 @@ import {
 } from '@/components/ui/sidebar';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Package, Mail, GitPullRequest } from 'lucide-react';
+import { Home, Package, Mail, GitPullRequest, Star } from 'lucide-react';
 
 const menuItems = [
   { href: '/manage', label: 'Dashboard', icon: Home },
   { href: '/manage/products', label: 'Products', icon: Package },
   { href: '/manage/inquiries', label: 'Inquiries', icon: Mail },
   { href: '/manage/requests', label: 'Requests', icon: GitPullRequest },
+  { href: '/manage/testimonials', label: 'Testimonials', icon: Star },
 ];
 
 export function ManagementSidebar() {
@@ -40,7 +41,7 @@ export function ManagementSidebar() {
           {menuItems.map((item) => (
             <SidebarMenuItem key={item.href}>
               <Link href={item.href} legacyBehavior passHref>
-                <SidebarMenuButton isActive={pathname === item.href} tooltip={item.label}>
+                <SidebarMenuButton isActive={pathname.startsWith(item.href) && item.href !== '/manage' || pathname === '/manage' && item.href === '/manage'} tooltip={item.label}>
                   <item.icon />
                   <span>{item.label}</span>
                 </SidebarMenuButton>

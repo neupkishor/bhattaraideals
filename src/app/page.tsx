@@ -3,8 +3,9 @@ import { Hero } from '@/components/home/hero';
 import { ProductGrid } from '@/components/products/product-grid';
 import { SellYourDevice } from '@/components/home/sell-your-device';
 import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
-import { collection } from 'firebase/firestore';
-import type { Product } from '@/lib/types';
+import { collection, query, orderBy, limit } from 'firebase/firestore';
+import type { Product, Testimonial } from '@/lib/types';
+import { Testimonials } from '@/components/home/testimonials';
 
 export default function Home() {
   const firestore = useFirestore();
@@ -12,7 +13,13 @@ export default function Home() {
     () => collection(firestore, 'products'),
     [firestore]
   );
-  const { data: products, isLoading } = useCollection<Product>(productsCollection);
+  const testimonialsCollection = useMemoFirebase(
+    () => query(collection(firestore, 'testimonials'), orderBy('createdAt', 'desc'), limit(5)),
+    [firestore]
+  );
+
+  const { data: products, isLoading: isLoadingProducts } = useCollection<Product>(productsCollection);
+  const { data: testimonials, isLoading: isLoadingTestimonials } = useCollection<Testimonial>(testimonialsCollection);
 
   const iphones = products?.filter((p) => p.category === 'iPhones') ?? [];
   const accessories = products?.filter((p) => p.category === 'AirPods' || p.category === 'Accessories') ?? [];
@@ -22,7 +29,7 @@ export default function Home() {
     <>
       <Hero />
       <div className="bg-background">
-        {isLoading ? (
+        {isLoadingProducts ? (
           <div className="text-center py-24">Loading products...</div>
         ) : (
           <>
@@ -34,6 +41,11 @@ export default function Home() {
             />
             <ProductGrid products={deals} title="Curated Deals" id="deals" />
           </>
+        )}
+        {isLoadingTestimonials ? (
+          <div className="text-center py-24">Loading testimonials...</div>
+        ) : (
+          <Testimonials testimonials={testimonials ?? []} />
         )}
         <SellYourDevice />
       </div>

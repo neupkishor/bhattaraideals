@@ -36,3 +36,11 @@ export type SellRequest = {
   requestDate: Timestamp;
   originalFilename?: string;
 };
+
+export type Testimonial = {
+  id: string;
+  name: string;
+  quote: string;
+  avatarUrl: string;
+  createdAt: Timestamp;
+};
