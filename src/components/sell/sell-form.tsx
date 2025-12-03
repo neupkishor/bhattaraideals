@@ -82,7 +82,6 @@ export function SellForm() {
     }
   };
 
-
   return (
     <Card className="rounded-2xl shadow-lg">
       <CardContent className="p-6 md:p-8">
