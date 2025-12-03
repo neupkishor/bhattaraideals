@@ -19,17 +19,20 @@ export function Hero() {
           with pickup and delivery right to your home. The most convenient
           service for all your iPhone needs is at your fingertips.
         </p>
-        <div className="flex justify-center gap-4 mb-16 animate-in fade-in slide-in-from-bottom-12 duration-500 delay-300">
+        <div className="flex flex-wrap justify-center gap-4 mb-16 animate-in fade-in slide-in-from-bottom-12 duration-500 delay-300">
           <Button size="lg" asChild>
-            <Link href="/#iphones">Shop iPhones</Link>
+            <Link href="/#iphones">Buy iPhones</Link>
           </Button>
-          <Button
+          <Button size="lg" variant="outline" asChild>
+            <Link href="/sell">Sell Your Device</Link>
+          </Button>
+           <Button
             size="lg"
             variant="outline"
             className="border-accent text-foreground hover:bg-accent/10 hover:text-accent-foreground"
             asChild
           >
-            <Link href="https://wa.me/9779860729833" target="_blank">Contact Now</Link>
+            <Link href="https://wa.me/9779860729833" target="_blank">Request a Repair</Link>
           </Button>
         </div>
         {heroImage && (
