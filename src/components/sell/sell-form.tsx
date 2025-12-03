@@ -144,7 +144,7 @@ export function SellForm() {
                <Select name="deviceSubType" required disabled={!selectedType}>
                 <SelectTrigger id="deviceSubType" >
                   <SelectValue placeholder="Select sub-category" />
-                </Trigger>
+                </SelectTrigger>
                 <SelectContent>
                   {selectedType && deviceTypes[selectedType].map((subType) => (
                     <SelectItem key={subType} value={subType}>{subType}</SelectItem>
