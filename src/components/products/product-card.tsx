@@ -38,7 +38,7 @@ export function ProductCard({ product }: { product: Product }) {
     <div className="group relative flex flex-col">
       <ConditionBadge condition={product.condition} />
       <Link
-        href={`/products/${product.id}`}
+        href={`/${product.id}`}
         className="block flex-grow h-full"
       >
         <Card className="h-full rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col">
