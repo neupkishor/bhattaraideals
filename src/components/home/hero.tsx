@@ -29,7 +29,7 @@ export function Hero() {
             className="border-accent text-foreground hover:bg-accent/10 hover:text-accent-foreground"
             asChild
           >
-            <Link href="/#deals">Explore Deals</Link>
+            <Link href="https://wa.me/9779860729833" target="_blank">Contact Now</Link>
           </Button>
         </div>
         {heroImage && (
