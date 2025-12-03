@@ -13,8 +13,9 @@ export function Hero() {
           Buy, Sell, Repair and Exchange your iPhone today!
         </h1>
         <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl mb-8 animate-in fade-in slide-in-from-bottom-10 duration-500 delay-200">
-          Discover certified pre-owned Apple products at unbeatable prices. Fully
-          tested, with warranty.
+          Discover certified pre-owned Apple products at unbeatable prices,
+          with pickup and delivery right to your home. The most convenient
+          service for all your iPhone needs is at your fingertips.
         </p>
         <div className="flex justify-center gap-4 mb-16 animate-in fade-in slide-in-from-bottom-12 duration-500 delay-300">
           <Button size="lg" asChild>
