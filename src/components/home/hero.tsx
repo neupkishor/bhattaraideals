@@ -21,10 +21,10 @@ export function Hero() {
         </p>
         <div className="flex flex-wrap justify-center gap-4 mb-16 animate-in fade-in slide-in-from-bottom-12 duration-500 delay-300">
           <Button size="lg" asChild>
-            <Link href="/#iphones">Buy iPhones</Link>
+            <Link href="https://wa.me/9779860729833" target="_blank">Buy iPhones</Link>
           </Button>
           <Button size="lg" variant="outline" asChild>
-            <Link href="/sell">Sell Your Device</Link>
+            <Link href="https://wa.me/9779860729833" target="_blank">Sell Your Device</Link>
           </Button>
            <Button
             size="lg"
