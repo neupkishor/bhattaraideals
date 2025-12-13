@@ -62,10 +62,9 @@ export default function ConfidencePage() {
                 <AccordionTrigger className="text-lg font-semibold text-left">
                   {item.question}
                 </AccordionTrigger>
-                <AccordionContent
-                  className="text-base text-muted-foreground leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: item.answer }}
-                ></AccordionContent>
+                <AccordionContent className="text-base text-muted-foreground leading-relaxed">
+                  <div dangerouslySetInnerHTML={{ __html: item.answer }} />
+                </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
