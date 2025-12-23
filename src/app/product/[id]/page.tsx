@@ -20,7 +20,10 @@ import { MakeOfferDialog } from '@/components/products/make-offer-dialog';
 export default function ProductPage() {
   const { id } = useParams();
   const firestore = useFirestore();
-  const productRef = useMemoFirebase(() => doc(firestore, 'products', id as string), [firestore, id]);
+  const productRef = useMemoFirebase(
+    () => (id ? doc(firestore, 'products', id as string) : null),
+    [firestore, id]
+  );
   const { data: product, isLoading } = useDoc<Product>(productRef);
 
   // This should fetch related products from Firestore
@@ -31,8 +34,14 @@ export default function ProductPage() {
     return <div className="container mx-auto text-center py-20">Loading...</div>;
   }
 
-  if (!id || !product) {
+  if (!isLoading && !product) {
     notFound();
+  }
+
+  // This check is necessary because product could be null here if not found
+  if (!product) {
+    // This will be caught by the loading check above, but it's good practice for type safety
+    return null;
   }
 
   return (
@@ -98,7 +107,7 @@ export default function ProductPage() {
                         <TableCell className="font-medium text-muted-foreground">
                           {key}
                         </TableCell>
-                        <TableCell>{value}</TableCell>
+                        <TableCell>{value as any}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
