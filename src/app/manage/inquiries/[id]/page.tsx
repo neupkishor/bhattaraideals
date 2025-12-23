@@ -42,6 +42,7 @@ export default function InquiryDetailPage() {
   };
   
   const getProductSlug = (name: string, id: string) => {
+    if (!name || !id) return '';
     return `${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${id}`;
   }
 
