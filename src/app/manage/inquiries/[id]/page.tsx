@@ -40,6 +40,11 @@ export default function InquiryDetailPage() {
       toast({ title: 'Error deleting inquiry', variant: 'destructive' });
     }
   };
+  
+  const getProductSlug = (name: string, id: string) => {
+    return `${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${id}`;
+  }
+
 
   if (isLoading) {
     return <div className="container p-8">Loading inquiry...</div>;
@@ -86,7 +91,7 @@ export default function InquiryDetailPage() {
         <CardContent className="space-y-4">
             <div className="flex items-center gap-3">
                 <Package className="h-5 w-5 text-muted-foreground" />
-                <span>Product: <Link href={`/${inquiry.productId}`} className="font-medium text-blue-600 hover:underline">{inquiry.productName || inquiry.productId}</Link></span>
+                <span>Product: <Link href={`/product/${getProductSlug(inquiry.productName || 'product', inquiry.productId)}`} className="font-medium text-blue-600 hover:underline">{inquiry.productName || inquiry.productId}</Link></span>
             </div>
              <div className="flex items-center gap-3">
                 <User className="h-5 w-5 text-muted-foreground" />
