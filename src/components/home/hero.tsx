@@ -2,13 +2,35 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { FloatingCard } from './floating-card';
+import { BadgeCheck, Phone } from 'lucide-react';
 
 export function Hero() {
   const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-iphone');
 
   return (
-    <section className="bg-white py-20 md:py-32">
-      <div className="container mx-auto px-4 md:px-6 text-center">
+    <section className="bg-white py-20 md:py-32 relative overflow-hidden">
+       {/* Floating cards */}
+      <FloatingCard
+        className="top-1/4 left-[5%] animate-float"
+        href="tel:+9779840710507"
+      >
+        <Phone className="h-6 w-6 text-blue-500" />
+        <div className="text-left">
+          <p className="font-bold">Prabesh Bhattarai</p>
+          <p className="text-sm text-muted-foreground">+977 9840710507</p>
+        </div>
+      </FloatingCard>
+
+      <FloatingCard className="top-1/3 right-[5%] animate-float [animation-delay:-4s]">
+        <BadgeCheck className="h-6 w-6 text-green-500" />
+        <div>
+          <p className="font-bold text-lg">70+</p>
+          <p className="text-sm text-muted-foreground">iPhones Sold</p>
+        </div>
+      </FloatingCard>
+
+      <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
         <h1 className="font-headline text-4xl md:text-6xl font-bold tracking-tighter mb-4 animate-in fade-in slide-in-from-bottom-8 duration-500">
           Buy, Sell, Repair and Exchange
           <br />
