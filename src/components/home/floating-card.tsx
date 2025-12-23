@@ -13,7 +13,7 @@ export function FloatingCard({
   href,
 }: FloatingCardProps) {
   const commonClasses =
-    'absolute bg-white/70 backdrop-blur-md rounded-2xl shadow-lg p-4 flex items-center gap-3 transition-transform hover:scale-105 hover:shadow-xl';
+    'absolute bg-white/70 backdrop-blur-md rounded-2xl shadow-lg p-4 flex items-center gap-3 transition-transform hover:scale-105 hover:shadow-xl z-20';
 
   const content = (
     <div className={cn(commonClasses, className)}>{children}</div>
