@@ -26,7 +26,7 @@ export function InfoBar() {
   return (
     <div className="bg-white relative">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="relative -mt-16 z-20">
+        <div className="relative -mt-12 z-20">
           <div className="grid grid-cols-1 md:grid-cols-3 rounded-2xl shadow-2xl bg-card border text-card-foreground overflow-hidden">
             {infoItems.map((item, index) => (
               <Link
