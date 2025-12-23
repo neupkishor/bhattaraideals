@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { Smartphone } from 'lucide-react';
 
@@ -21,6 +22,9 @@ export function Footer() {
             </Link>
              <Link href="/#repair" className="hover:text-foreground">
               Repair
+            </Link>
+            <Link href="/about" className="hover:text-foreground">
+              About
             </Link>
             <Link href="/compare" className="hover:text-foreground">
               Compare

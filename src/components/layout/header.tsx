@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -100,6 +101,12 @@ export function Header() {
               className="text-foreground/80 hover:text-foreground transition-colors"
             >
               Deals
+            </Link>
+            <Link
+              href="/about"
+              className="text-foreground/80 hover:text-foreground transition-colors"
+            >
+              About
             </Link>
             <Link
               href="/compare"
