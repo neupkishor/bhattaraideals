@@ -16,15 +16,17 @@ export function Header() {
         'sticky top-0 z-50 w-full transition-all duration-300 bg-white/80 backdrop-blur-sm border-b shadow-md'
       )}
     >
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-        <Link
-          href="/"
-          className="flex items-center gap-2 font-bold text-lg font-headline"
-        >
-          <Smartphone className="h-6 w-6 text-primary-foreground" />
-          <span>Bhattarai Deals</span>
-        </Link>
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+      <div className="container mx-auto flex h-16 items-center px-4 md:px-6">
+        <div className="flex items-center flex-1">
+          <Link
+            href="/"
+            className="flex items-center gap-2 font-bold text-lg font-headline"
+          >
+            <Smartphone className="h-6 w-6 text-primary-foreground" />
+            <span>Bhattarai Deals</span>
+          </Link>
+        </div>
+        <nav className="hidden md:flex items-center gap-6 text-sm font-medium justify-center">
           <Link
             href="/#deals"
             className="text-foreground/80 hover:text-foreground transition-colors"
@@ -53,9 +55,11 @@ export function Header() {
             </Link>
           )}
         </nav>
-        <Button size="sm" asChild>
-          <Link href="/#iphones">Shop iPhones</Link>
-        </Button>
+        <div className="flex items-center justify-end flex-1">
+          <Button size="sm" asChild>
+            <Link href="/#iphones">Shop iPhones</Link>
+          </Button>
+        </div>
       </div>
     </header>
   );
