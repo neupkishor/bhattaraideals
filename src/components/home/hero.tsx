@@ -9,7 +9,7 @@ export function Hero() {
   const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-iphone');
 
   return (
-    <section className="bg-white pt-20 md:pt-32 relative">
+    <section className="bg-white pt-20 md:pt-32 relative pb-16">
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="text-left">

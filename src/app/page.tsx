@@ -30,8 +30,8 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <div className="bg-background pt-24 relative">
-        <InfoBar />
+      <InfoBar />
+      <div className="bg-background pt-24">
         {isLoadingProducts ? (
           <div className="text-center py-24">Loading products...</div>
         ) : (
