@@ -33,21 +33,21 @@ export function Header() {
         'sticky top-0 z-50 w-full transition-all duration-300 shadow-md'
       )}
     >
-      <div className="bg-slate-800 text-white">
+      <div className="bg-slate-900 text-slate-200">
         <div className="container mx-auto flex h-10 items-center justify-between px-4 md:px-6 text-xs">
           <div className="flex items-center gap-4">
             <a
               href="tel:+9779840710507"
-              className="flex items-center gap-1.5 hover:text-primary transition-colors"
+              className="flex items-center gap-1.5 hover:text-white transition-colors"
             >
-              <Phone />
+              <Phone className="h-4 w-4" />
               <span>+977 9840710507</span>
             </a>
             <a
               href="mailto:contact@bhattaraideals.com"
-              className="hidden md:flex items-center gap-1.5 hover:text-primary transition-colors"
+              className="hidden md:flex items-center gap-1.5 hover:text-white transition-colors"
             >
-              <Mail />
+              <Mail className="h-4 w-4" />
               <span>contact@bhattaraideals.com</span>
             </a>
           </div>
@@ -58,7 +58,7 @@ export function Header() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"
-              className="hover:text-primary transition-colors"
+              className="hover:text-white transition-colors"
             >
               <WhatsAppIcon />
             </a>
@@ -67,7 +67,7 @@ export function Header() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
-              className="hover:text-primary transition-colors"
+              className="hover:text-white transition-colors"
             >
               <Facebook className="h-4 w-4" />
             </a>
@@ -76,7 +76,7 @@ export function Header() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="hover:text-primary transition-colors"
+              className="hover:text-white transition-colors"
             >
               <Instagram className="h-4 w-4" />
             </a>

@@ -16,7 +16,7 @@ export function Hero() {
             <h1 className="font-headline text-4xl md:text-6xl font-bold tracking-tighter mb-4 animate-in fade-in slide-in-from-bottom-8 duration-500">
               Buy, Sell, Repair and Exchange
               <br />
-              your iPhone today!
+              your <span className="text-primary-foreground">iPhone</span> today!
             </h1>
             <p className="max-w-xl text-muted-foreground md:text-xl mb-8 animate-in fade-in slide-in-from-bottom-10 duration-500 delay-200">
               Discover certified pre-owned Apple products at unbeatable prices.
