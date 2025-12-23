@@ -18,10 +18,7 @@ import type { Product } from '@/lib/types';
 import { MakeOfferDialog } from '@/components/products/make-offer-dialog';
 
 export default function ProductPage() {
-  const params = useParams();
-  const slug = params.slug as string;
-  const id = slug?.split('-').pop() ?? '';
-  
+  const { id } = useParams();
   const firestore = useFirestore();
   const productRef = useMemoFirebase(() => doc(firestore, 'products', id as string), [firestore, id]);
   const { data: product, isLoading } = useDoc<Product>(productRef);

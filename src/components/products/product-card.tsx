@@ -34,13 +34,12 @@ function ConditionBadge({ condition }: ConditionBadgeProps) {
 }
 
 export function ProductCard({ product }: { product: Product }) {
-  const slug = `${product.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${product.id}`;
 
   return (
     <div className="group relative flex flex-col">
       <ConditionBadge condition={product.condition} />
       <Link
-        href={`/product/${slug}`}
+        href={`/product/${product.id}`}
         className="block flex-grow h-full"
       >
         <Card className="h-full rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col">
