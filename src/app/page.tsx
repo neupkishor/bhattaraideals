@@ -7,7 +7,6 @@ import { collection, query, orderBy, limit } from 'firebase/firestore';
 import type { Product, Testimonial } from '@/lib/types';
 import { Testimonials } from '@/components/home/testimonials';
 import { RepairServices } from '@/components/home/repair-services';
-import { InfoBar } from '@/components/home/info-bar';
 
 export default function Home() {
   const firestore = useFirestore();
@@ -30,8 +29,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <InfoBar />
-      <div className="bg-background pt-24">
+      <div className="bg-background">
         {isLoadingProducts ? (
           <div className="text-center py-24">Loading products...</div>
         ) : (
