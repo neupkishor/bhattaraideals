@@ -7,6 +7,9 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export function Hero() {
   const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-iphone');
+  const whatsappLink = 'https://wa.me/9779860729833';
+  const interactiveWordClass =
+    'transition-colors hover:text-primary-foreground';
 
   return (
     <section className="bg-white pt-20 md:pt-32 relative pb-16">
@@ -14,7 +17,39 @@ export function Hero() {
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="text-left">
             <h1 className="font-headline text-4xl md:text-6xl font-bold tracking-tighter mb-4 animate-in fade-in slide-in-from-bottom-8 duration-500">
-              Buy, Sell, Repair and Exchange
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={interactiveWordClass}
+              >
+                Buy
+              </a>
+              ,{' '}
+              <a
+                href="/sell"
+                className={interactiveWordClass}
+              >
+                Sell
+              </a>
+              ,{' '}
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={interactiveWordClass}
+              >
+                Repair
+              </a>{' '}
+              and{' '}
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={interactiveWordClass}
+              >
+                Exchange
+              </a>
               <br />
               your <span className="text-primary-foreground">iPhone</span> today!
             </h1>
@@ -25,7 +60,7 @@ export function Hero() {
             </p>
             <div className="flex flex-wrap justify-start gap-4 mb-16 animate-in fade-in slide-in-from-bottom-12 duration-500 delay-300">
               <Button size="lg" asChild>
-                <Link href="https://wa.me/9779860729833" target="_blank">
+                <Link href={whatsappLink} target="_blank">
                   Buy iPhones
                 </Link>
               </Button>
@@ -38,7 +73,7 @@ export function Hero() {
                 className="border-accent text-foreground hover:bg-accent/10 hover:text-accent-foreground"
                 asChild
               >
-                <Link href="https://wa.me/9779860729833" target="_blank">
+                <Link href={whatsappLink} target="_blank">
                   Request a Repair
                 </Link>
               </Button>
