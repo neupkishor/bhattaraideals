@@ -5,6 +5,7 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { FirebaseClientProvider } from '@/firebase';
+import { ProgressBar } from '@/components/layout/progress-bar';
 
 export const metadata: Metadata = {
   title: 'Bhattarai Deals',
@@ -31,6 +32,7 @@ export default function RootLayout({
         />
       </head>
       <body className={cn('font-body antialiased')}>
+        <ProgressBar />
         <FirebaseClientProvider>
           <Header />
           <main className="min-h-screen">{children}</main>

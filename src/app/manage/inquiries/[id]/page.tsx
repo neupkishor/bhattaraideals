@@ -40,7 +40,7 @@ export default function InquiryDetailPage() {
       toast({ title: 'Error deleting inquiry', variant: 'destructive' });
     }
   };
-
+  
   if (isLoading) {
     return <div className="container p-8">Loading inquiry...</div>;
   }
@@ -86,7 +86,7 @@ export default function InquiryDetailPage() {
         <CardContent className="space-y-4">
             <div className="flex items-center gap-3">
                 <Package className="h-5 w-5 text-muted-foreground" />
-                <span>Product: <Link href={`/${inquiry.productId}`} className="font-medium text-blue-600 hover:underline">{inquiry.productName || inquiry.productId}</Link></span>
+                <span>Product: <Link href={`/product/${inquiry.productId}`} className="font-medium text-blue-600 hover:underline">{inquiry.productName || inquiry.productId}</Link></span>
             </div>
              <div className="flex items-center gap-3">
                 <User className="h-5 w-5 text-muted-foreground" />
