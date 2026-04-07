@@ -1,10 +1,7 @@
 'use client';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useDoc, useFirestore, useMemoFirebase } from '@/firebase';
-import { doc, deleteDoc } from 'firebase/firestore';
-import type { SellRequest } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Trash2, ArrowLeft, User, Phone, Mail as MailIcon, HardDrive, Calendar } from 'lucide-react';
@@ -21,29 +18,16 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { format } from 'date-fns';
+import { getRequestById } from '@/lib/content';
 
 export default function RequestDetailPage() {
   const { id } = useParams();
-  const router = useRouter();
-  const firestore = useFirestore();
-  const requestRef = useMemoFirebase(() => doc(firestore, 'requests', id as string), [firestore, id]);
-  const { data: request, isLoading } = useDoc<SellRequest>(requestRef);
+  const request = id ? getRequestById(id as string) : null;
   const { toast } = useToast();
 
   const handleDelete = async () => {
-    try {
-      await deleteDoc(doc(firestore, 'requests', id as string));
-      toast({ title: 'Request deleted successfully.' });
-      router.push('/manage/requests');
-    } catch (error) {
-      console.error('Error deleting request:', error);
-      toast({ title: 'Error deleting request', variant: 'destructive' });
-    }
+    toast({ title: 'Read-only mode', description: 'Request deletion is disabled without Firebase.' });
   };
-
-  if (isLoading) {
-    return <div className="container p-8">Loading request...</div>;
-  }
 
   if (!request) {
     return <div className="container p-8">Request not found.</div>;
@@ -87,7 +71,7 @@ export default function RequestDetailPage() {
             <div className="space-y-4">
                  <div className="flex items-center gap-3">
                     <Calendar className="h-5 w-5 text-muted-foreground" />
-                    <span>Date: <span className="font-medium">{format(request.requestDate.toDate(), 'PPP p')}</span></span>
+                  <span>Date: <span className="font-medium">{format(request.requestDate, 'PPP p')}</span></span>
                 </div>
                 <h3 className="font-semibold text-lg border-b pb-2">Contact Information</h3>
                  <div className="flex items-center gap-3">

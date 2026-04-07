@@ -12,36 +12,17 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { ProductGrid } from '@/components/products/product-grid';
-import { useDoc, useFirestore, useMemoFirebase } from '@/firebase';
-import { doc } from 'firebase/firestore';
 import type { Product } from '@/lib/types';
 import { MakeOfferDialog } from '@/components/products/make-offer-dialog';
+  import { getProductById } from '@/lib/content';
 
 export default function ProductPage() {
   const { id } = useParams();
-  const firestore = useFirestore();
-  const productRef = useMemoFirebase(
-    () => (id ? doc(firestore, 'products', id as string) : null),
-    [firestore, id]
-  );
-  const { data: product, isLoading } = useDoc<Product>(productRef);
-
-  // This should fetch related products from Firestore
-  // For now, we'll keep it simple and not show related products
+    const product = id ? getProductById(id as string) : null;
   const relatedProducts: Product[] = [];
 
-  if (isLoading) {
-    return <div className="container mx-auto text-center py-20">Loading...</div>;
-  }
-
-  if (!isLoading && !product) {
+    if (!product) {
     notFound();
-  }
-
-  // This check is necessary because product could be null here if not found
-  if (!product) {
-    // This will be caught by the loading check above, but it's good practice for type safety
-    return null;
   }
 
   return (

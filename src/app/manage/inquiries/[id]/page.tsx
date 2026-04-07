@@ -1,9 +1,6 @@
 'use client';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { useDoc, useFirestore, useMemoFirebase } from '@/firebase';
-import { doc, deleteDoc } from 'firebase/firestore';
-import type { Inquiry } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -21,29 +18,16 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { format } from 'date-fns';
+import { getInquiryById } from '@/lib/content';
 
 export default function InquiryDetailPage() {
   const { id } = useParams();
-  const router = useRouter();
-  const firestore = useFirestore();
-  const inquiryRef = useMemoFirebase(() => doc(firestore, 'inquiries', id as string), [firestore, id]);
-  const { data: inquiry, isLoading } = useDoc<Inquiry>(inquiryRef);
+  const inquiry = id ? getInquiryById(id as string) : null;
   const { toast } = useToast();
 
   const handleDelete = async () => {
-    try {
-      await deleteDoc(doc(firestore, 'inquiries', id as string));
-      toast({ title: 'Inquiry deleted successfully.' });
-      router.push('/manage/inquiries');
-    } catch (error) {
-      console.error('Error deleting inquiry:', error);
-      toast({ title: 'Error deleting inquiry', variant: 'destructive' });
-    }
+    toast({ title: 'Read-only mode', description: 'Inquiry deletion is disabled without Firebase.' });
   };
-  
-  if (isLoading) {
-    return <div className="container p-8">Loading inquiry...</div>;
-  }
 
   if (!inquiry) {
     return <div className="container p-8">Inquiry not found.</div>;
@@ -94,7 +78,7 @@ export default function InquiryDetailPage() {
             </div>
              <div className="flex items-center gap-3">
                 <Calendar className="h-5 w-5 text-muted-foreground" />
-                <span>Date: <span className="font-medium">{format(inquiry.inquiryDate.toDate(), 'PPP p')}</span></span>
+              <span>Date: <span className="font-medium">{format(inquiry.inquiryDate, 'PPP p')}</span></span>
             </div>
             <div className="flex items-center gap-3">
                 <DollarSign className="h-5 w-5 text-muted-foreground" />

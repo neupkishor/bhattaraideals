@@ -1,5 +1,3 @@
-import { Timestamp } from 'firebase/firestore';
-
 export type Product = {
   id: string;
   name: string;
@@ -20,7 +18,7 @@ export type Inquiry = {
   userId: string;
   message: string;
   offerAmount: number;
-  inquiryDate: Timestamp;
+  inquiryDate: Date;
   productName?: string;
   userEmail?: string;
 };
@@ -33,7 +31,7 @@ export type SellRequest = {
   deviceType: string;
   deviceSubType: string;
   photoUrl: string;
-  requestDate: Timestamp;
+  requestDate: Date;
   originalFilename?: string;
 };
 
@@ -42,5 +40,5 @@ export type Testimonial = {
   name: string;
   quote: string;
   avatarUrl: string;
-  createdAt: Timestamp;
+  createdAt: Date;
 };

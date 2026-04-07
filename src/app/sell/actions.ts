@@ -1,8 +1,6 @@
 'use server';
 
 import { z } from 'zod';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { initializeFirebase } from '@/firebase';
 
 const schema = z
   .object({
@@ -19,8 +17,6 @@ const schema = z
   });
 
 export async function submitForQuote(prevState: any, formData: FormData) {
-  const { firestore } = initializeFirebase();
-
   const file = formData.get('photo') as File | null;
 
   if (!file) {
@@ -72,13 +68,6 @@ export async function submitForQuote(prevState: any, formData: FormData) {
     if (!uploadResult.success) {
         throw new Error(uploadResult.message || 'The upload API returned an error.');
     }
-
-    // Save the details to the 'requests' collection in Firestore
-    await addDoc(collection(firestore, 'requests'), {
-      ...validatedFields.data,
-      photoUrl: uploadResult.url,
-      requestDate: serverTimestamp(),
-    });
 
     return {
       message: 'Thank you! Your quote request has been submitted successfully. We will get back to you soon.',

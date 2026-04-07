@@ -1,9 +1,7 @@
 'use client';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useDoc, useFirestore, useMemoFirebase } from '@/firebase';
-import { doc, deleteDoc } from 'firebase/firestore';
 import type { Product } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -11,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
 import { Edit, Trash2, ArrowLeft } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { getProductById } from '@/lib/content';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -25,26 +24,12 @@ import {
 
 export default function ProductDetailPage() {
   const { id } = useParams();
-  const router = useRouter();
-  const firestore = useFirestore();
-  const productRef = useMemoFirebase(() => doc(firestore, 'products', id as string), [firestore, id]);
-  const { data: product, isLoading } = useDoc<Product>(productRef);
+  const product = id ? getProductById(id as string) : null;
   const { toast } = useToast();
 
   const handleDelete = async () => {
-    try {
-      await deleteDoc(doc(firestore, 'products', id as string));
-      toast({ title: 'Product deleted successfully.' });
-      router.push('/manage/products');
-    } catch (error) {
-      console.error('Error deleting product:', error);
-      toast({ title: 'Error deleting product', variant: 'destructive' });
-    }
+    toast({ title: 'Read-only mode', description: 'Delete is disabled after removing Firebase.' });
   };
-
-  if (isLoading) {
-    return <div className="container p-8">Loading product details...</div>;
-  }
 
   if (!product) {
     return <div className="container p-8">Product not found.</div>;

@@ -10,7 +10,6 @@ import {
   Instagram,
   Facebook,
 } from 'lucide-react';
-import { useUser } from '@/firebase';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -26,8 +25,6 @@ const WhatsAppIcon = () => (
 );
 
 export function Header() {
-  const { user } = useUser();
-
   return (
     <header
       className={cn(
@@ -120,15 +117,13 @@ export function Header() {
             >
               Confidence
             </Link>
-            {user && (
-              <Link
-                href="/manage"
-                className="text-foreground/80 hover:text-foreground transition-colors"
-              >
-                <Briefcase className="h-5 w-5" />
-                <span className="sr-only">Manage</span>
-              </Link>
-            )}
+            <Link
+              href="/manage"
+              className="text-foreground/80 hover:text-foreground transition-colors"
+            >
+              <Briefcase className="h-5 w-5" />
+              <span className="sr-only">Manage</span>
+            </Link>
           </nav>
           <div className="flex items-center justify-end flex-1">
             <Button size="sm" asChild>

@@ -13,11 +13,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { useAuth, useFirestore, useUser } from '@/firebase';
-import { addDoc, collection } from 'firebase/firestore';
 import { useToast } from '@/hooks/use-toast';
 import type { Product } from '@/lib/types';
-import { initiateAnonymousSignIn } from '@/firebase/non-blocking-login';
 
 export function MakeOfferDialog({ product }: { product: Product }) {
   const [open, setOpen] = useState(false);
@@ -25,23 +22,9 @@ export function MakeOfferDialog({ product }: { product: Product }) {
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const { user, isUserLoading } = useUser();
-  const auth = useAuth();
-  const firestore = useFirestore();
   const { toast } = useToast();
 
   const handleMakeOffer = async () => {
-    if (!user) {
-      initiateAnonymousSignIn(auth);
-      toast({
-        title: 'Please sign in',
-        description:
-          'You need to be signed in to make an offer. We have signed you in anonymously. Please try again.',
-        variant: 'destructive',
-      });
-      return;
-    }
-
     if (!offerAmount || offerAmount <= 0) {
       toast({
         title: 'Invalid offer',
@@ -53,19 +36,9 @@ export function MakeOfferDialog({ product }: { product: Product }) {
 
     setIsLoading(true);
     try {
-      const inquiriesRef = collection(firestore, 'inquiries');
-      await addDoc(inquiriesRef, {
-        productId: product.id,
-        productName: product.name,
-        userId: user.uid,
-        userEmail: user.email || 'Anonymous',
-        offerAmount: Number(offerAmount),
-        message: message,
-        inquiryDate: new Date(),
-      });
       toast({
-        title: 'Offer Sent!',
-        description: 'We have received your offer and will get back to you soon.',
+        title: 'Offer recorded locally',
+        description: 'Firebase has been removed. This button now demonstrates the offer flow only.',
       });
       setOpen(false);
       setMessage('');
@@ -74,7 +47,7 @@ export function MakeOfferDialog({ product }: { product: Product }) {
       console.error('Error sending offer:', error);
       toast({
         title: 'Error',
-        description: 'There was a problem sending your offer. Please try again.',
+        description: 'There was a problem handling your offer. Please try again.',
         variant: 'destructive',
       });
     } finally {
@@ -124,7 +97,7 @@ export function MakeOfferDialog({ product }: { product: Product }) {
           </div>
         </div>
         <DialogFooter>
-          <Button onClick={handleMakeOffer} disabled={isLoading || isUserLoading}>
+          <Button onClick={handleMakeOffer} disabled={isLoading}>
             {isLoading ? 'Sending...' : 'Send Offer'}
           </Button>
         </DialogFooter>
