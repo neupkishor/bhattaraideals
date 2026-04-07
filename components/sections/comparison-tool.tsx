@@ -3,7 +3,7 @@
 import { useFormState, useFormStatus } from 'react-dom';
 import { useEffect, useRef } from 'react';
 import type { Product } from '../../lib/products';
-import { getComparison } from '../../../app/compare/actions';
+import { getComparison } from '../../app/compare/actions';
 import { Button } from '@/components/ui/button';
 import {
   Select,

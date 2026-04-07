@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
-import './globals.css';
-import { cn } from '../lib/utils';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { ProgressBar } from '@/components/layout/progress-bar';
+import { SiteHeadBody, SiteHeadHead } from '@/components/sitehead/sitehead';
 
 export const metadata: Metadata = {
   title: 'Bhattarai Deals',
@@ -29,11 +28,14 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
+        <SiteHeadHead />
       </head>
-      <body className={cn('font-body antialiased')}>
+      <body className="font-body antialiased">
         <ProgressBar />
         <Header />
-        <main className="min-h-screen">{children}</main>
+        <main className="min-h-screen">
+          <SiteHeadBody>{children}</SiteHeadBody>
+        </main>
         <Footer />
         <Toaster />
       </body>
