@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Trash2, ArrowLeft, User, Phone, Mail as MailIcon, HardDrive, Calendar } from 'lucide-react';
-import { useToast } from '../../../../hooks/use-toast';
+import { useToast } from '../../../../core/hooks/use-toast';
 import {
   AlertDialog,
   AlertDialogAction,

@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Trash2, ArrowLeft, User, Package, Calendar, MessageSquare, DollarSign } from 'lucide-react';
-import { useToast } from '../../../../hooks/use-toast';
+import { useToast } from '../../../../core/hooks/use-toast';
 import {
   AlertDialog,
   AlertDialogAction,

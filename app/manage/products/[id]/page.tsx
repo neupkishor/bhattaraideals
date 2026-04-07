@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
 import { Edit, Trash2, ArrowLeft } from 'lucide-react';
-import { useToast } from '../../../../hooks/use-toast';
+import { useToast } from '../../../../core/hooks/use-toast';
 import { getProductById } from '../../../../lib/content';
 import {
   AlertDialog,

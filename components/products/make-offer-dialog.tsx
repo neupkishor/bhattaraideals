@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { useToast } from '../../hooks/use-toast';
+import { useToast } from '../../core/hooks/use-toast';
 import type { Product } from '../../lib/types';
 
 export function MakeOfferDialog({ product }: { product: Product }) {

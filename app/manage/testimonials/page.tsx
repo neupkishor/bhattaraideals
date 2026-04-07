@@ -12,7 +12,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { PlusCircle, Edit, Trash2 } from 'lucide-react';
-import { useToast } from '../../../hooks/use-toast';
+import { useToast } from '../../../core/hooks/use-toast';
 import { format } from 'date-fns';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { testimonials } from '../../../lib/content';

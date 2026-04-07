@@ -14,7 +14,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Card, CardContent } from '@/components/ui/card';
-import { useToast } from '../../hooks/use-toast';
+import { useToast } from '../../core/hooks/use-toast';
 import { Loader2, Upload } from 'lucide-react';
 import Image from 'next/image';
 import imageCompression from 'browser-image-compression';

@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/select';
 import { Card, CardContent } from '@/components/ui/card';
 import { Loader2 } from 'lucide-react';
-import { useToast } from '../../hooks/use-toast';
+import { useToast } from '../../core/hooks/use-toast';
 
 function SubmitButton() {
   const { pending } = useFormStatus();

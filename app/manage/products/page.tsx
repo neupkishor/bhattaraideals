@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { PlusCircle, Edit, Trash2 } from 'lucide-react';
-import { useToast } from '../../../hooks/use-toast';
+import { useToast } from '../../../core/hooks/use-toast';
 import { products } from '../../../lib/content';
 
 export default function ProductsPage() {
