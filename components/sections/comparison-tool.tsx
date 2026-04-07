@@ -27,7 +27,7 @@ function SubmitButton() {
 }
 
 export function ComparisonTool({ products }: { products: Product[] }) {
-  const initialState = { message: null, comparison: null };
+  const initialState = { message: '', comparison: null as string | null };
   const [state, formAction] = useFormState(getComparison, initialState);
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);

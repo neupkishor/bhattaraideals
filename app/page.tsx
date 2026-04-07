@@ -1,9 +1,9 @@
-import { Hero } from '@/components/home/hero';
-import { ProductGrid } from '@/components/products/product-grid';
-import { SellYourDevice } from '@/components/home/sell-your-device';
+import { Hero } from '@/components/sections/hero';
+import { ProductGrid } from '@/components/sections/product-grid';
+import { SellYourDevice } from '@/components/sections/sell-your-device';
 import { products, testimonials } from '../lib/content';
-import { Testimonials } from '@/components/home/testimonials';
-import { RepairServices } from '@/components/home/repair-services';
+import { Testimonials } from '@/components/sections/testimonials';
+import { RepairServices } from '@/components/sections/repair-services';
 
 export default function Home() {
   const iphones = products.filter((product) => product.category === 'iPhones');

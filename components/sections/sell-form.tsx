@@ -43,7 +43,7 @@ function SubmitButton() {
 }
 
 export function SellForm() {
-  const initialState = { message: null, isSuccess: false };
+  const initialState = { message: '', isSuccess: false };
   const [state, formAction] = useFormState(submitForQuote, initialState);
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);

@@ -1,8 +1,30 @@
 'use server';
 
-import { compareDevices } from '@/ai/flows/compare-devices-side-by-side';
 import { z } from 'zod';
 import { products } from '../../lib/products';
+
+function buildComparison(device1: (typeof products)[number], device2: (typeof products)[number]) {
+  const firstSpecs = device1.specs ?? {};
+  const secondSpecs = device2.specs ?? {};
+  const allKeys = Array.from(new Set([...Object.keys(firstSpecs), ...Object.keys(secondSpecs)]));
+
+  const lines = [
+    `${device1.name} (${device1.condition}) vs ${device2.name} (${device2.condition})`,
+    '',
+    `Price: NRS ${device1.price} vs NRS ${device2.price}`,
+    `Availability: ${device1.availability} vs ${device2.availability}`,
+    '',
+    'Specs',
+  ];
+
+  for (const key of allKeys) {
+    const a = firstSpecs[key] ?? 'N/A';
+    const b = secondSpecs[key] ?? 'N/A';
+    lines.push(`- ${key}: ${a} | ${b}`);
+  }
+
+  return lines.join('\n');
+}
 
 const schema = z.object({
   device1Id: z.string().min(1, 'Please select the first device.'),
@@ -43,15 +65,11 @@ export async function getComparison(prevState: any, formData: FormData) {
     };
   }
 
-  const device1Name = `${device1.name} (${device1.condition})`;
-  const device2Name = `${device2.name} (${device2.condition})`;
-
   try {
-    const result = await compareDevices({
-      device1: device1Name,
-      device2: device2Name,
-    });
-    return { message: 'Comparison generated.', comparison: result.comparison };
+    return {
+      message: 'Comparison generated.',
+      comparison: buildComparison(device1, device2),
+    };
   } catch (error) {
     console.error(error);
     return {

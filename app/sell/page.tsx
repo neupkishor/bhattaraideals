@@ -1,4 +1,4 @@
-import { SellForm } from '@/components/sell/sell-form';
+import { SellForm } from '@/components/sections/sell-form';
 
 export default function SellPage() {
   return (

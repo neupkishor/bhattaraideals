@@ -1,4 +1,4 @@
-import { ComparisonTool } from '@/components/compare/comparison-tool';
+import { ComparisonTool } from '@/components/sections/comparison-tool';
 import { products } from '../../lib/products';
 
 export default function ComparePage() {

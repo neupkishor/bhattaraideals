@@ -11,17 +11,17 @@ import {
   TableCell,
   TableRow,
 } from '@/components/ui/table';
-import { ProductGrid } from '@/components/products/product-grid';
+import { ProductGrid } from '@/components/sections/product-grid';
 import type { Product } from '../../../lib/types';
-import { MakeOfferDialog } from '@/components/products/make-offer-dialog';
-  import { getProductById } from '../../../lib/content';
+import { MakeOfferDialog } from '@/components/sections/make-offer-dialog';
+import { getProductById } from '../../../lib/content';
 
 export default function ProductPage() {
   const { id } = useParams();
-    const product = id ? getProductById(id as string) : null;
+  const product = id ? getProductById(id as string) : null;
   const relatedProducts: Product[] = [];
 
-    if (!product) {
+  if (!product) {
     notFound();
   }
 
