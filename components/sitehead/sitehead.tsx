@@ -1,16 +1,29 @@
 import type { ReactNode } from 'react';
 import siteHeadConfig from './sitehead.json';
 
-type SiteHeadNode = {
+export interface SiteHeadNode {
 	tag: 'meta' | 'script' | 'noscript' | 'link';
 	props?: Record<string, string | number | boolean | undefined>;
 	html?: string;
-};
+}
 
-type SiteHeadConfig = {
+export interface SiteHeadConfig {
 	head?: SiteHeadNode[];
 	body?: SiteHeadNode[];
-};
+}
+
+export interface SiteHeadLayoutProps {
+	children: ReactNode;
+	header?: ReactNode;
+	footer?: ReactNode;
+	headChildren?: ReactNode;
+	bodyPrefix?: ReactNode;
+	bodySuffix?: ReactNode;
+	htmlLang?: string;
+	htmlClassName?: string;
+	bodyClassName?: string;
+	mainClassName?: string;
+}
 
 const config = siteHeadConfig as SiteHeadConfig;
 
@@ -42,6 +55,37 @@ export function SiteHeadBody({ children }: { children: ReactNode }) {
 			{(config.body ?? []).map(renderNode)}
 			{children}
 		</>
+	);
+}
+
+export function SiteHeadLayout({
+	children,
+	header,
+	footer,
+	headChildren,
+	bodyPrefix,
+	bodySuffix,
+	htmlLang = 'en',
+	htmlClassName = 'scroll-smooth',
+	bodyClassName = 'font-body antialiased',
+	mainClassName = 'min-h-screen',
+}: SiteHeadLayoutProps) {
+	return (
+		<html lang={htmlLang} className={htmlClassName}>
+			<head>
+				{headChildren}
+				<SiteHeadHead />
+			</head>
+			<body className={bodyClassName}>
+				{bodyPrefix}
+				{header}
+				<main className={mainClassName}>
+					<SiteHeadBody>{children}</SiteHeadBody>
+				</main>
+				{footer}
+				{bodySuffix}
+			</body>
+		</html>
 	);
 }
 
