@@ -10,9 +10,17 @@ import {
   Instagram,
   Facebook,
 } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 import { cn } from '../../lib/utils';
 import { Button } from '@/components/ui/button';
+
+const navItems = [
+  { href: '/#deals', label: 'Deals', activePath: '/' },
+  { href: '/about', label: 'About', activePath: '/about' },
+  { href: '/compare', label: 'Compare', activePath: '/compare' },
+  { href: '/confidence', label: 'Confidence', activePath: '/confidence' },
+] as const;
 
 const WhatsAppIcon = () => (
   <svg
@@ -25,6 +33,8 @@ const WhatsAppIcon = () => (
 );
 
 export function Header() {
+  const pathname = usePathname();
+
   return (
     <header
       className={cn(
@@ -97,31 +107,28 @@ export function Header() {
               </span>
             </Link>
           </div>
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium justify-center">
-            <Link
-              href="/#deals"
-              className="text-foreground/80 hover:text-foreground transition-colors"
-            >
-              Deals
-            </Link>
-            <Link
-              href="/about"
-              className="text-foreground/80 hover:text-foreground transition-colors"
-            >
-              About
-            </Link>
-            <Link
-              href="/compare"
-              className="text-foreground/80 hover:text-foreground transition-colors"
-            >
-              Compare
-            </Link>
-            <Link
-              href="/confidence"
-              className="text-foreground/80 hover:text-foreground transition-colors"
-            >
-              Confidence
-            </Link>
+          <nav className="hidden md:flex items-center gap-2 text-sm font-medium justify-center">
+            {navItems.map((item) => {
+              const isActive = pathname === item.activePath;
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={cn(
+                    'relative rounded-md px-3 py-2 text-foreground/75 transition-[color,background-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]',
+                    'hover:-translate-y-0.5 hover:scale-105 hover:bg-primary/55 hover:text-primary-foreground hover:shadow-sm',
+                    'active:translate-y-0 active:scale-95 active:bg-primary active:shadow-inner',
+                    isActive
+                      ? 'bg-primary text-primary-foreground shadow-sm'
+                      : ''
+                  )}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
             <Link
               href="/manage"
               className="text-foreground/80 hover:text-foreground transition-colors"
