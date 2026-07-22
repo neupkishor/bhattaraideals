@@ -17,8 +17,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['"SF Pro Text"', 'Inter', 'sans-serif'],
-        headline: ['"SF Pro Display"', 'Inter', 'sans-serif'],
+        body: ['sans-serif'],
+        headline: ['sans-serif'],
         code: ['monospace'],
       },
       colors: {
