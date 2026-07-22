@@ -18,7 +18,7 @@ export function Testimonials({ testimonials }: { testimonials: Testimonial[] }) 
   }
 
   return (
-    <section id="testimonials" className="py-16 md:py-24 border-t bg-white">
+    <section id="testimonials" className="section-block py-16 md:py-24 border-t">
       <div className="container mx-auto px-4 md:px-6">
         <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tight text-center mb-12">
           What Our Customers Say

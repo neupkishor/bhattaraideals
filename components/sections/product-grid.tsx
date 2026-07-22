@@ -26,9 +26,9 @@ export function ProductGrid({
   if (products.length === 0) return null;
 
   return (
-    <section id={id} className="py-16 md:py-24 border-t">
+    <section id={id} className="section-block py-16 md:py-24 border-t">
       <div className="container mx-auto px-4 md:px-6">
-        <div className={description ? 'mb-10 max-w-3xl text-left' : 'mb-12 text-center'}>
+        <div className="mb-10 max-w-3xl text-left">
           <h2 className="font-headline text-3xl font-bold tracking-tight md:text-4xl">
             {title}
           </h2>

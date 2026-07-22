@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react';
 
 export function SellYourDevice() {
   return (
-    <section id="sell" className="py-16 md:py-24 border-t">
+    <section id="sell" className="section-block py-16 md:py-24 border-t">
       <div className="container mx-auto px-4 md:px-6">
         <Card className="bg-card overflow-hidden shadow-lg border-primary/20">
           <div className="grid md:grid-cols-2 items-center">

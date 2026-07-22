@@ -21,7 +21,7 @@ export function Hero() {
     'text-[hsl(264_60%_54%)] underline decoration-transparent underline-offset-8 transition-[color,text-decoration-color,text-underline-offset] duration-300 hover:text-[hsl(264_70%_40%)] hover:decoration-[hsl(264_60%_54%)] hover:underline-offset-4';
 
   return (
-    <section className="relative bg-white py-12 md:py-20">
+    <section className="section-block relative py-12 md:py-20">
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="text-left">

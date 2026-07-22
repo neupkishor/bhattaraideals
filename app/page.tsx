@@ -11,22 +11,30 @@ export default function Home() {
   const deals = products.filter((product) => product.category === 'Deals');
 
   return (
-    <>
+    <main className="section-stack">
       <Hero />
-      <div className="bg-background">
-        <ProductGrid
-          products={iphones}
-          title="iPhones"
-          id="iphones"
-          description="Browse verified iPhones with clear condition labels, fair local pricing, and availability you can trust before visiting or chatting with us."
-          variant="carousel"
-        />
-        <ProductGrid products={accessories} title="AirPods & Accessories" id="accessories" />
-        <ProductGrid products={deals} title="Curated Deals" id="deals" />
-        <Testimonials testimonials={testimonials} />
-        <SellYourDevice />
-        <RepairServices />
-      </div>
-    </>
+      <ProductGrid
+        products={iphones}
+        title="iPhones"
+        id="iphones"
+        description="Browse verified iPhones with clear condition labels, fair local pricing, and availability you can trust before visiting or chatting with us."
+        variant="carousel"
+      />
+      <ProductGrid
+        products={accessories}
+        title="AirPods & Accessories"
+        id="accessories"
+        description="Find original AirPods, MagSafe chargers, and everyday Apple essentials selected for compatibility, condition, and reliable local support."
+      />
+      <ProductGrid
+        products={deals}
+        title="Curated Deals"
+        id="deals"
+        description="Explore limited picks with stronger value, clean condition notes, and straightforward pricing for quick decisions."
+      />
+      <Testimonials testimonials={testimonials} />
+      <SellYourDevice />
+      <RepairServices />
+    </main>
   );
 }

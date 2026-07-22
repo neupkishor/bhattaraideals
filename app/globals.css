@@ -85,6 +85,16 @@ body {
   }
 }
 
+@layer components {
+  .section-stack > .section-block:nth-of-type(odd) {
+    @apply bg-white;
+  }
+
+  .section-stack > .section-block:nth-of-type(even) {
+    background-color: hsl(var(--primary) / 0.35);
+  }
+}
+
 /* nprogress */
 #nprogress {
   pointer-events: none;
