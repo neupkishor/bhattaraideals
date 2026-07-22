@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { Suspense, type ReactNode } from 'react';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
@@ -51,7 +51,9 @@ export function BaseLayout({
 			footer={footer}
 			bodyPrefix={
 				<>
-					<ProgressBar />
+					<Suspense fallback={null}>
+						<ProgressBar />
+					</Suspense>
 					{bodyPrefix}
 				</>
 			}
