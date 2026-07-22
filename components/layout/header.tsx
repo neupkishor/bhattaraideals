@@ -35,11 +35,11 @@ export function Header() {
         <div className="container mx-auto flex h-10 items-center justify-between px-4 md:px-6 text-xs">
           <div className="flex items-center gap-4">
             <a
-              href="tel:+9779840710507"
+              href="tel:+9779860729833"
               className="flex items-center gap-1.5 hover:text-white transition-colors"
             >
               <Phone className="h-4 w-4" />
-              <span>+977 9840710507</span>
+              <span>+977 9860729833</span>
             </a>
             <a
               href="mailto:contact@bhattaraideals.com"

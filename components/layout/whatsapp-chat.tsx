@@ -1,41 +1,42 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowLeft, MessageCircle, Send, X } from 'lucide-react';
+import { MessageCircle, Send, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const whatsappNumber = '9779860729833';
 
 const actionOptions = [
-  { id: 'sell', label: 'I want to sell.' },
-  { id: 'buy', label: 'I want to buy.' },
-  { id: 'repair', label: 'I want to repair.' },
-  { id: 'exchange', label: 'I want to Exchange.' },
-  { id: 'chat', label: 'Just chat.' },
+  {
+    id: 'sell',
+    label: 'I want to sell.',
+    message: 'Hi Bhattarai Deals, I want to sell my device.',
+  },
+  {
+    id: 'buy',
+    label: 'I want to buy.',
+    message: 'Hi Bhattarai Deals, I want to buy a device.',
+  },
+  {
+    id: 'repair',
+    label: 'I want to repair.',
+    message: 'Hi Bhattarai Deals, I want to repair my device.',
+  },
+  {
+    id: 'exchange',
+    label: 'I want to Exchange.',
+    message: 'Hi Bhattarai Deals, I want to exchange my device.',
+  },
+  {
+    id: 'chat',
+    label: 'Just chat.',
+    message: 'Hi Bhattarai Deals, I want to chat.',
+  },
 ] as const;
-
-const productOptions = ['iPhone', 'Macbooks', 'Mac', 'Phone'] as const;
-
-type ActionOption = (typeof actionOptions)[number];
-type ActionId = ActionOption['id'];
-type ProductOption = (typeof productOptions)[number];
-
-const actionText: Record<Exclude<ActionId, 'chat'>, string> = {
-  sell: 'sell',
-  buy: 'buy',
-  repair: 'repair',
-  exchange: 'exchange',
-};
 
 function getWhatsAppHref(message: string) {
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
-
-function getActionMessage(action: Exclude<ActionId, 'chat'>, product: ProductOption) {
-  return `Hi Bhattarai Deals, I want to ${actionText[action]} ${product}.`;
-}
-
-const chatHref = getWhatsAppHref('Hi Bhattarai Deals, I want to chat.');
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -55,20 +56,6 @@ function WhatsAppIcon({ className }: { className?: string }) {
 
 export function WhatsAppChat() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedAction, setSelectedAction] = useState<Exclude<ActionId, 'chat'> | null>(null);
-
-  const handleActionSelect = (action: ActionId) => {
-    if (action === 'chat') {
-      window.open(chatHref, '_blank', 'noopener,noreferrer');
-      return;
-    }
-
-    setSelectedAction(action);
-  };
-
-  const resetChat = () => {
-    setSelectedAction(null);
-  };
 
   return (
     <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3">
@@ -97,47 +84,18 @@ export function WhatsAppChat() {
           <div className="max-w-[85%] rounded-lg border bg-card px-3 py-2 text-sm text-card-foreground shadow-sm">
             Hi, how can we help with buying, selling, repair, or exchange?
           </div>
-          {selectedAction ? (
-            <div className="space-y-3">
-              <button
-                type="button"
-                className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
-                onClick={resetChat}
+          <div className="space-y-2">
+            {actionOptions.map((option) => (
+              <Button
+                key={option.id}
+                variant="outline"
+                className="h-auto w-full justify-start whitespace-normal py-2 text-left"
+                asChild
               >
-                <ArrowLeft className="h-3.5 w-3.5" />
-                Back
-              </button>
-              <div className="text-sm font-medium">
-                What do you want to {actionText[selectedAction]}?
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                {productOptions.map((product) => (
-                  <Button
-                    key={product}
-                    variant="outline"
-                    className="h-auto justify-start whitespace-normal py-2 text-left"
-                    asChild
-                  >
-                    <a
-                      href={getWhatsAppHref(getActionMessage(selectedAction, product))}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Send className="h-4 w-4" />
-                      {product}
-                    </a>
-                  </Button>
-                ))}
-              </div>
-            </div>
-          ) : (
-            <div className="space-y-2">
-              {actionOptions.map((option) => (
-                <Button
-                  key={option.id}
-                  variant="outline"
-                  className="h-auto w-full justify-start whitespace-normal py-2 text-left"
-                  onClick={() => handleActionSelect(option.id)}
+                <a
+                  href={getWhatsAppHref(option.message)}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {option.id === 'chat' ? (
                     <MessageCircle className="h-4 w-4" />
@@ -145,10 +103,10 @@ export function WhatsAppChat() {
                     <Send className="h-4 w-4" />
                   )}
                   {option.label}
-                </Button>
-              ))}
-            </div>
-          )}
+                </a>
+              </Button>
+            ))}
+          </div>
         </div>
       </div>
       <button
