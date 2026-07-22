@@ -4,6 +4,7 @@ import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { ProgressBar } from '@/components/layout/progress-bar';
 import { SiteHeadLayout } from '@/components/sitehead/sitehead';
+import { WhatsAppChat } from '@/components/layout/whatsapp-chat';
 
 export interface BaseLayoutProps {
 	children: ReactNode;
@@ -50,6 +51,7 @@ export function BaseLayout({
 			bodySuffix={
 				<>
 					{bodySuffix}
+					<WhatsAppChat />
 					<Toaster />
 				</>
 			}

@@ -89,7 +89,12 @@ export function Header() {
               className="flex items-center gap-2 font-bold text-lg font-headline"
             >
               <Smartphone className="h-6 w-6 text-primary-foreground" />
-              <span>Bhattarai Deals</span>
+              <span className="flex flex-col leading-tight">
+                <span>Bhattarai Deals</span>
+                <span className="text-xs font-medium text-muted-foreground">
+                  Balaju, Kathmandu
+                </span>
+              </span>
             </Link>
           </div>
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium justify-center">
